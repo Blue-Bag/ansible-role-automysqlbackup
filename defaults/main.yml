@@ -82,7 +82,7 @@ automysqlbackup_miscfiles:
 # - files : send log file and sql files as attachments (see docs)
 # - stdout : will simply output the log to the screen if run manually.
 # - quiet : Only send logs if an error occurs to the MAILADDR.
-automysqlbackup_mailcontent: 'stdout'
+automysqlbackup_mailcontent: 'quiet'
 automysqlbackup_mail_maxattsize: '4000'
 automysqlbackup_mail_address: 'root'
 
@@ -120,3 +120,8 @@ automysqlbackup_encrypt_pwd: 'password0123'
 
 automysqlbackup_umask: 'umask 0077'
 automysqlbackup_dryrun: '0'
+
+healhcheck_monitor:
+   enabled: no
+   key: jhjkhjkhjhk
+   url: 'https://hchk.io/'

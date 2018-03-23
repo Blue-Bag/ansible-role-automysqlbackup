@@ -55,7 +55,7 @@
     name: "Automysqlbackup - Backup DB"
     hour: "{{ automysqlbackup_cron_hour }}"
     minute: "{{ automysqlbackup_cron_minute }}"
-    job: "{{ automysqlbackup_binpath }} > /dev/null"
+    job: "{{ automysqlbackup_binpath }} {% '&& curl -fsS --retry 3 {{ healhcheck_monitor.url }}/{{ healhcheck_monitor.key }}' if healhcheck_monitor.enabled  else '' %} > /dev/null"
     cron_file: automysqlbackup
     user: "{{ automysqlbackup_user }}"
   become: true
