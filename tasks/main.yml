@@ -30,14 +30,11 @@
 - name: Install from Package manager if requested
   include_tasks: packagemanager.yml
   when: automysqlbackup_src == 'package'
-  tags:
-    - automysqlbackup
+
 
 - name: Install manually if requested
   include_tasks: manual.yml
   when: automysqlbackup_src == 'manual'
-  tags:
-    - automysqlbackup
 
 # pass priv in as a variable to be idempotent
 # see http://stackoverflow.com/questions/22958443/how-to-grant-mysql-server-administration-privileges-super-reload-with-ansi
