@@ -17,6 +17,8 @@ automysqlbackup_binpath: '/usr/local/bin/automysqlbackup'
 automysqlbackup_dump_user_privileges:
   - '*.*:SELECT,RELOAD,SHOW DATABASES,LOCK TABLES,EVENT'
 
+
+automysqlbackup_cron_disabled: no
 automysqlbackup_cron_hour: "4"
 automysqlbackup_cron_minute: "23"
 
@@ -121,7 +123,7 @@ automysqlbackup_encrypt_pwd: 'password0123'
 automysqlbackup_umask: 'umask 0077'
 automysqlbackup_dryrun: '0'
 
-healhcheck_monitor:
+healthcheck_monitor:
    enabled: no
    key: jhjkhjkhjhk
    url: 'https://hchk.io/'

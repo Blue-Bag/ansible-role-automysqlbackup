@@ -50,13 +50,27 @@
   become: true
   tags: [automysqlbackup]
 
+
+- name: set fact for health check monitoring on cron
+  set_fact:
+    health_chk: '&& curl -fsS --retry 3 {{ healthcheck_monitor.url }}/{{ healthcheck_monitor.key }}'
+  when: healthcheck_monitor.enabled
+
+- name: set fact for health check monitoring on cron
+  set_fact:
+    health_chk: ''
+  when: not healthcheck_monitor.enabled
+
+
 - name: Manual | Automysqlbackup daily cronjob for backup
   cron:
     name: "Automysqlbackup - Backup DB"
     hour: "{{ automysqlbackup_cron_hour }}"
     minute: "{{ automysqlbackup_cron_minute }}"
-    job: "{{ automysqlbackup_binpath }} {% '&& curl -fsS --retry 3 {{ healhcheck_monitor.url }}/{{ healhcheck_monitor.key }}' if healhcheck_monitor.enabled  else '' %} > /dev/null"
+    job: "{{ automysqlbackup_binpath }} {{ health_chk }} > /dev/null"
     cron_file: automysqlbackup
     user: "{{ automysqlbackup_user }}"
+    state: present
+    disabled: "{{ automysqlbackup_cron_disabled }}"
   become: true
   tags: [automysqlbackup]
