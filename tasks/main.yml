@@ -4,7 +4,7 @@
 # see http://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
 
 - name: Install MySQL python packages
-  apt: name={{ item }} state=installed
+  apt: name={{ item }} state=present
   become: true
   with_items:
    - python-mysqldb
