@@ -38,6 +38,15 @@
   become: true
   tags: [automysqlbackup]
 
+- name: Manual | Correct permissions for file
+  file:
+    path: "{{ automysqlbackup_folder }}/automysqlbackup"
+    owner: "{{ automysqlbackup_user }}"
+    group: "{{ automysqlbackup_group }}"
+    mode: 0750
+  become: true
+  tags: [automysqlbackup]
+
 - name: Manual | Set the configuration
   template:
     src: automysqlbackup_v3.conf.j2
