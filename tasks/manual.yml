@@ -62,13 +62,14 @@
 
 - name: set fact for health check monitoring on cron
   set_fact:
-    health_chk: '&& curl -fsS --retry 3 {{ healthcheck_monitor.url }}/{{ healthcheck_monitor.key }}'
-  when: healthcheck_monitor.enabled
+    health_chk: '&& curl -fsS --retry 3 {{ healthcheck_monitor.db_backup.url }}/{{ healthcheck_monitor.db_backup.key }}'
+  when: healthcheck_monitor.db_backup.enabled
+
 
 - name: set fact for health check monitoring on cron
   set_fact:
     health_chk: ''
-  when: not healthcheck_monitor.enabled
+  when: not healthcheck_monitor.db_backup.enabled
 
 
 - name: Manual | Automysqlbackup daily cronjob for backup

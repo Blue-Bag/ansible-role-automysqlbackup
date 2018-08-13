@@ -123,7 +123,12 @@ automysqlbackup_encrypt_pwd: 'password0123'
 automysqlbackup_umask: 'umask 0077'
 automysqlbackup_dryrun: '0'
 
+
 healthcheck_monitor:
-   enabled: no
-   key: jhjkhjkhjhk
-   url: 'https://hchk.io/'
+  db_backup:
+    enabled: no
+    key: 'ghjgjhgjhgjhgjhg'
+    url: 'https://hc-ping.com/'
+
+
+
