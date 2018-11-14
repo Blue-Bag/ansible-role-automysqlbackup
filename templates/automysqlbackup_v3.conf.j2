@@ -61,7 +61,7 @@ CONFIG_db_names={{ automysqlbackup_dbnames |  default('()') }}
 # set to (), i.e. empty, if you want to backup all databases
 CONFIG_db_month_names={{ automysqlbackup_monthlynames |  default('()') }}
 
-# List of DBNAMES to EXLUCDE if DBNAMES is empty, i.e. ().
+# List of DBNAMES to EXCLUDE if DBNAMES is empty, i.e. ().
 #CONFIG_db_exclude=( 'information_schema' )
 CONFIG_db_exclude=({% for db in automysqlbackup_db_exclude %}'{{ db }}' {% endfor %})
 
