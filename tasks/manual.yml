@@ -18,14 +18,34 @@
   become: true
   tags: [automysqlbackup]
 
+# on some systems the tmp mount is set to noexec
+# so we have to use a different tmp folder
+# https://github.com/ansible/ansible/issues/30064
+- name: Manual | Create the automysqlbackup tmp directory
+  file:
+    path: "{{ automysqlbackup_tmp_folder }}"
+    state: directory
+    owner: "{{ remote_user }}"
+    group: "{{ first5user_admin_group }}"
+    mode: 0775
+    recurse: no
+  become: true
+  tags: [automysqlbackup]
+  when: automysqlbackup_tmp_folder != '/tmp'
+
+
 - name: Manual | Get automysqlbackup from github
+  environment:
+      TMPDIR: "{{ automysqlbackup_tmp_folder }}"
+      TMP: "{{ automysqlbackup_folder }}"
+      TEMP: "{{ automysqlbackup_folder }}"
   git:
     repo: "{{ automysqlbackup_repo }}"
     dest: "{{ automysqlbackup_folder }}"
     version: "{{ automysqlbackup_repo_branch }}"
     accept_hostkey: "yes"
     force: no
-    update: no
+    update: yes
   become: true
   tags: [automysqlbackup]
 

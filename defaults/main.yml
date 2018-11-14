@@ -4,10 +4,16 @@
 # src for the install [package | manual]
 automysqlbackup_src: 'manual'
 
-automysqlbackup_repo: 'git@github.com:Blue-Bag/automysqlbackup.git'
+#automysqlbackup_repo: 'git@github.com:Blue-Bag/automysqlbackup.git'
+automysqlbackup_repo: 'https://github.com/Blue-Bag/automysqlbackup.git'
 automysqlbackup_repo_branch: 'master'
 automysqlbackup_folder: '/etc/automysqlbackup'
 automysqlbackup_scripts_folder: '/var/backups/scripts'
+
+# on some systems the tmp mount is set to noexec
+# so we have to use a different tmp folder
+automysqlbackup_tmp_folder: '/tmp'
+#'/home/{{ remote_user }}/tmp'
 
 # user / group for folder ownership
 automysqlbackup_user:  'root'
