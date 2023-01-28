@@ -3,9 +3,14 @@
 #
 # see http://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
 
+- name: Determine required MySQL Python libraries.
+  set_fact:
+    mysql_python_package_debian: "{% if ansible_python.version.major == 3|default('') %}python3-mysqldb{% else %}python-mysqldb{% endif %}"
+  when: mysql_python_package_debian is not defined
+
 - name: Install MySQL python packages
   apt:
-    name: ['python-mysqldb']
+    name: "{{ mysql_python_package_debian }}"
     state: present
   become: true
   tags:
