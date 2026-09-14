@@ -45,7 +45,7 @@
 # see http://stackoverflow.com/questions/22958443/how-to-grant-mysql-server-administration-privileges-super-reload-with-ansi
 
 - name: Create backup user in MySQL
-  mysql_user:
+  ansible.mysql.mysql_user:
     user: "{{ automysqlbackup_dump_user }}"
     password: "{{ automysqlbackup_dump_user_pword }}"
     state: present

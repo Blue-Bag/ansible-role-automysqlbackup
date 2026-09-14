@@ -69,7 +69,7 @@ CONFIG_db_exclude=({% for db in automysqlbackup_db_exclude %}'{{ db }}' {% endfo
 # You may use wildcards for the table names, i.e. 'mydb.a*' selects all tables starting with an 'a'.
 # However we only offer the wildcard '*', matching everything that could appear, which translates to the
 # '%' wildcard in mysql.
-CONFIG_table_exclude={{ automysqlbackup_table_exclude | default('()') }}
+CONFIG_table_exclude=({{ automysqlbackup_table_exclude | default('()') }})
 
 
 # Advanced Settings

@@ -25,7 +25,7 @@
   file:
     path: "{{ automysqlbackup_tmp_folder }}"
     state: directory
-    owner: "{{ remote_user }}"
+    owner: "{{ main_remote_user }}"
     group: "{{ first5user_admin_group }}"
     mode: 0775
     recurse: no
@@ -97,7 +97,7 @@
     name: "Automysqlbackup - Backup DB"
     hour: "{{ automysqlbackup_cron_hour }}"
     minute: "{{ automysqlbackup_cron_minute }}"
-    job: "{{ automysqlbackup_binpath }} {{ health_chk }} > /dev/null"
+    job: "{{ automysqlbackup_binpath }} {{ health_chk }} > /dev/null 2>&1"
     cron_file: automysqlbackup
     user: "{{ automysqlbackup_user }}"
     state: present

@@ -13,7 +13,7 @@ automysqlbackup_scripts_folder: '/var/backups/scripts'
 # on some systems the tmp mount is set to noexec
 # so we have to use a different tmp folder
 automysqlbackup_tmp_folder: '/tmp'
-#'/home/{{ remote_user }}/tmp'
+#'/home/{{ main_remote_user }}/tmp'
 
 # user / group for folder ownership
 automysqlbackup_user:  'root'
@@ -21,7 +21,7 @@ automysqlbackup_group:  'root'
 automysqlbackup_binpath: '/usr/local/bin/automysqlbackup'
 
 automysqlbackup_dump_user_privileges:
-  - '*.*:SELECT,RELOAD,SHOW DATABASES,LOCK TABLES,EVENT,SHOW VIEW'
+  - '*.*:SELECT,RELOAD,SHOW DATABASES,LOCK TABLES,EVENT,SHOW VIEW,EXECUTE'
 
 
 automysqlbackup_cron_disabled: no
@@ -54,6 +54,7 @@ automysqlbackup_db_exclude:
   - 'information_schema'
   - 'performance_schema'
   - 'mysql'
+  - 'sys'
 
 automysqlbackup_create_db: 'no'
 automysqlbackup_sepdir: 'yes'
