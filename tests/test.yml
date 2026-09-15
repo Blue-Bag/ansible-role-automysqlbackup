@@ -7,4 +7,5 @@
     automysqlbackup_dump_user_pword: 'password'
 
   roles:
+    - geerlingguy.mysql
     - role_under_test

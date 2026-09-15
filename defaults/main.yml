@@ -4,10 +4,16 @@
 # src for the install [package | manual]
 automysqlbackup_src: 'manual'
 
-automysqlbackup_repo: 'git@github.com:Blue-Bag/automysqlbackup.git'
+#automysqlbackup_repo: 'git@github.com:Blue-Bag/automysqlbackup.git'
+automysqlbackup_repo: 'https://github.com/Blue-Bag/automysqlbackup.git'
 automysqlbackup_repo_branch: 'master'
 automysqlbackup_folder: '/etc/automysqlbackup'
 automysqlbackup_scripts_folder: '/var/backups/scripts'
+
+# on some systems the tmp mount is set to noexec
+# so we have to use a different tmp folder
+automysqlbackup_tmp_folder: '/tmp'
+#'/home/{{ main_remote_user }}/tmp'
 
 # user / group for folder ownership
 automysqlbackup_user:  'root'
@@ -15,8 +21,10 @@ automysqlbackup_group:  'root'
 automysqlbackup_binpath: '/usr/local/bin/automysqlbackup'
 
 automysqlbackup_dump_user_privileges:
-  - '*.*:SELECT,RELOAD,SHOW DATABASES,LOCK TABLES,EVENT'
+  - '*.*:SELECT,RELOAD,SHOW DATABASES,LOCK TABLES,EVENT,SHOW VIEW,EXECUTE'
 
+
+automysqlbackup_cron_disabled: no
 automysqlbackup_cron_hour: "4"
 automysqlbackup_cron_minute: "23"
 
@@ -46,6 +54,7 @@ automysqlbackup_db_exclude:
   - 'information_schema'
   - 'performance_schema'
   - 'mysql'
+  - 'sys'
 
 automysqlbackup_create_db: 'no'
 automysqlbackup_sepdir: 'yes'
@@ -82,7 +91,7 @@ automysqlbackup_miscfiles:
 # - files : send log file and sql files as attachments (see docs)
 # - stdout : will simply output the log to the screen if run manually.
 # - quiet : Only send logs if an error occurs to the MAILADDR.
-automysqlbackup_mailcontent: 'stdout'
+automysqlbackup_mailcontent: 'quiet'
 automysqlbackup_mail_maxattsize: '4000'
 automysqlbackup_mail_address: 'root'
 
@@ -120,3 +129,13 @@ automysqlbackup_encrypt_pwd: 'password0123'
 
 automysqlbackup_umask: 'umask 0077'
 automysqlbackup_dryrun: '0'
+
+
+healthcheck_monitor:
+  db_backup:
+    enabled: no
+    key: 'ghjgjhgjhgjhgjhg'
+    url: 'https://hc-ping.com/'
+
+
+
